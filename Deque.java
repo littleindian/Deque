@@ -49,7 +49,7 @@ public class Deque<Item> implements Iterable<Item> {
     }
         
     private void add(Item item, Node position) {
-        if(item == null) throw new java.lang.UnsupportedOperationException();
+        if(item == null) throw new NullPointerException();
         Node newNode = new Node();
         newNode.s = item;
         size++;
@@ -136,10 +136,10 @@ public class Deque<Item> implements Iterable<Item> {
         s = testDeque.removeFirst();
         StdOut.println("First one is: " + s);
         
-        s = (String) testDeque.removeFirst();
+        s = (String) testDeque.removeLast();
+        StdOut.println("Last element is: " + s);
+        s = testDeque.removeFirst();
         StdOut.println("First element is: " + s);
-        s = testDeque.removeLast();
-        StdOut.println("Last one is: " + s);
         
         
         i = testDeque.iterator();
@@ -152,6 +152,7 @@ public class Deque<Item> implements Iterable<Item> {
         i = testDeque.iterator();
         while(i.hasNext())
             StdOut.println("\n3. Element is : " + i.next());
+        //StdOut.println(i.next());
         //testDeque.addFirst(null);
     }
 }
