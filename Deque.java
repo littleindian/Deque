@@ -52,7 +52,7 @@ public class Deque<Item> implements Iterable<Item> {
         Node newNode = new Node();
         newNode.s = item;
         size++;
-        if(position == first) {
+        if(position == null) {
             newNode.next = first;
             if(first != null) {
                 first.prev = newNode;
@@ -73,13 +73,13 @@ public class Deque<Item> implements Iterable<Item> {
     // insert the item at the front
     public void addFirst(Item item) {
         if(item == null) throw new java.lang.UnsupportedOperationException();
-        add(item, first);
+        add(item, null);
     }
     
     // insert the item at the end
     public void addLast(Item item) {
         if(size == 0) {
-            add(item, first);
+            add(item, null);
         } else {
             add(item, last);
         }
@@ -116,24 +116,29 @@ public class Deque<Item> implements Iterable<Item> {
     
     // unit testing
     public static void main(String[] args) {
-        Deque testDeque = new Deque<String>();
-        Iterator i;
-        testDeque.addFirst("Hello");
+        Deque<String> testDeque = new Deque<String>();
+        Iterator<String> i;
+        testDeque.addLast("Hello");
         testDeque.addLast("Girish");
-        testDeque.addFirst("Now this is great");
-        testDeque.addLast("New Last");
+        testDeque.addLast("Now this is great");
+        testDeque.addLast("and this is the last");
         StdOut.println("Iterating over deque...");
         i = testDeque.iterator();
         while(i.hasNext())
-            StdOut.println("Element is : " + i.next());
+            StdOut.println("1. Element is : " + i.next());
         
         String s = (String) testDeque.removeLast();
         StdOut.println("Last element is: " + s);
-        s = (String) testDeque.removeFirst();
+        s = testDeque.removeFirst();
         StdOut.println("First one is: " + s);
         //testDeque.addFirst(null);
         i = testDeque.iterator();
         while(i.hasNext())
-            StdOut.println("Element is : " + i.next());
+            StdOut.println("2. Element is : " + i.next());
+        testDeque.addFirst("Hello");
+        testDeque.addLast("and this is the last");
+        i = testDeque.iterator();
+        while(i.hasNext())
+            StdOut.println("3. Element is : " + i.next());
     }
 }
