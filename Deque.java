@@ -49,6 +49,7 @@ public class Deque<Item> implements Iterable<Item> {
     }
         
     private void add(Item item, Node position) {
+        if(item == null) throw new java.lang.UnsupportedOperationException();
         Node newNode = new Node();
         newNode.s = item;
         size++;
@@ -72,7 +73,6 @@ public class Deque<Item> implements Iterable<Item> {
     
     // insert the item at the front
     public void addFirst(Item item) {
-        if(item == null) throw new java.lang.UnsupportedOperationException();
         add(item, null);
     }
     
@@ -91,6 +91,10 @@ public class Deque<Item> implements Iterable<Item> {
         if(size < 1) throw new java.util.NoSuchElementException();
         size--;
         ret = first.s;
+        if(size == 0) {
+            first = last = null;
+            return ret;
+        }
         first = first.next;
         first.prev = null;
         if(size == 0) last = null;
@@ -128,17 +132,26 @@ public class Deque<Item> implements Iterable<Item> {
             StdOut.println("1. Element is : " + i.next());
         
         String s = (String) testDeque.removeLast();
-        StdOut.println("Last element is: " + s);
+        StdOut.println("\nLast element is: " + s);
         s = testDeque.removeFirst();
         StdOut.println("First one is: " + s);
-        //testDeque.addFirst(null);
+        
+        s = (String) testDeque.removeFirst();
+        StdOut.println("First element is: " + s);
+        s = testDeque.removeLast();
+        StdOut.println("Last one is: " + s);
+        
+        
         i = testDeque.iterator();
         while(i.hasNext())
             StdOut.println("2. Element is : " + i.next());
-        testDeque.addFirst("Hello");
+        testDeque.addLast("Hello");
+        testDeque.addLast("Girish");
+        testDeque.addLast("Now this is great");
         testDeque.addLast("and this is the last");
         i = testDeque.iterator();
         while(i.hasNext())
-            StdOut.println("3. Element is : " + i.next());
+            StdOut.println("\n3. Element is : " + i.next());
+        //testDeque.addFirst(null);
     }
 }
